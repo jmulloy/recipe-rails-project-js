@@ -7,11 +7,13 @@
 <%= link_to "Create a Recipe", new_user_recipe_path(current_user) %>
 
 <% else %>
+
+<div id=recipes-display></div>
 <h1>All Recipes</h1>
 <%= link_to "Filtered Recipes by Name", recipes_ordered_by_name_path %> 
 <%= link_to "Filtered Recipes by Time", recipes_ordered_by_time_path %>
 <%end%>
-<div class="recipes">
+<div class="recipes"></div>
   <% @recipes.each do |recipe| %>
     <div class="recipe">
       <h3><%= link_to recipe.name, recipe_path(recipe) %></h3>
