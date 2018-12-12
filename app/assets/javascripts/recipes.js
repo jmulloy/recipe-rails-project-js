@@ -83,6 +83,7 @@ function listenForClickMyRecipes() {
 function listenForClickCreateRecipe() {
     let asdf = document.getElementById('createrecipe')
     asdf.addEventListener('click', function(e) {
-        e.preventDefault
+        e.preventDefault()
+        console.log("This has been clicked!")
     })
 }
