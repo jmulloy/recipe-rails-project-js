@@ -79,3 +79,7 @@ function listenForClickMyRecipes() {
     //    console.log("this has been clicked!")
     })
 }
+
+function listenForClickCreateRecipe() {
+    
+}
