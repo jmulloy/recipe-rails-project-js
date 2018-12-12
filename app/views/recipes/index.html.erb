@@ -14,8 +14,8 @@
 <%= link_to "Filtered Recipes by Time", recipes_ordered_by_time_path %>
 <%end%>
 <div class="recipes"></div>
-  <% @recipes.each do |recipe| %>
     <div class="recipe">
+  <% @recipes.each do |recipe| %>
       <h3><%= link_to recipe.name, recipe_path(recipe) %></h3>
       <% if current_user.id == recipe.user.id %>
       <ul class="recipe-actions">

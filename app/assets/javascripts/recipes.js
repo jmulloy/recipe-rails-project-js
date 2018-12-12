@@ -19,13 +19,12 @@ function listenForClickAllRecipes() {
 		e.preventDefault()
 		$.get("/recipes.json", function(data){
             let recipes = data
-            // debugger
-            let name = recipes[0]["name"]
-            let description = recipes[0]["description"]
-            let somevariable = '<li>' + name + ' ' + description + '</li>'
-            // $("#allrecipes").html(somevariable)
-            $(".recipe").html(somevariable)
-    
+            let somevariable = ""
+            recipes.forEach((recipe) => {
+                somevariable += '<li>' + recipe["name"] + ' - ' + recipe["description"] + '</li>';
+                // debugger
+            });
+               $(".recipe").html(somevariable)
         })
 	})
 }

@@ -12,7 +12,8 @@
 <nav class="navbar navbar-light bg-light">
 
  <% if current_user %>
-    
+ <a class="btn btn-outline-success" id="createrecipe" href="/users/<%=current_user.id%>/recipes" role="button">
+      AJAX: Create a Recipe </a>
     <a class="btn btn-outline-success" id="myrecipes" href="/users/<%=current_user.id%>/recipes" role="button">
       My Recipes </a>
     <a class="btn btn-outline-success" id="allrecipes" href="/recipes" role="button">
