@@ -1,3 +1,3 @@
 class QuantitySerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :amount
 end

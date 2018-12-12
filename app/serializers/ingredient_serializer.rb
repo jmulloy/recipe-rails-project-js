@@ -1,3 +1,3 @@
 class IngredientSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name
 end
