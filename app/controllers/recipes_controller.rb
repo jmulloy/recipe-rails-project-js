@@ -80,7 +80,10 @@ class RecipesController < ApplicationController
                 quantity = @recipe.quantities.build
                 quantity.build_ingredient
             end 
-            render :new
+            respond_to do |f|
+                f.html {render :index}
+                f.json {render json: @recipes}
+            end
         end
     end
 
