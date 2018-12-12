@@ -1,5 +1,5 @@
 <% if flash[:alert] %>
-<%= flash[:alert] %>
+  <%= flash[:alert] %>
 <%end%>
 <% if @user %>
 <h1><%= @user.email %>'s Recipes</h1>
@@ -14,19 +14,19 @@
 <%= link_to "Filtered Recipes by Time", recipes_ordered_by_time_path %>
 <%end%>
 <div class="recipes"></div>
-    <div class="recipe">
-  <% @recipes.each do |recipe| %>
-      <h3><%= link_to recipe.name, recipe_path(recipe) %></h3>
-      <% if current_user.id == recipe.user.id %>
-      <ul class="recipe-actions">
-        <li><%= link_to "Edit", edit_user_recipe_path(current_user, recipe) %></li>
-       <%= form_tag recipe_path(recipe), method: "delete" do %>
-    <%= submit_tag "Delete #{recipe.name}", :class => 'btn btn-danger' %>
-  <% end %>
-      </ul>
-      <%end%>
-    </div>
-  <% end %>
+  <div class="recipe">
+    <ul class="recipe-actions">
+        <% @recipes.each do |recipe| %>
+          <h3><%= link_to recipe.name, recipe_path(recipe) %></h3>
+          <% if current_user.id == recipe.user.id %>
+            <li><%= link_to "Edit", edit_user_recipe_path(current_user, recipe) %></li>
+            <%= form_tag recipe_path(recipe), method: "delete" do %>
+              <%= submit_tag "Delete #{recipe.name}", :class => 'btn btn-danger' %>
+            <% end %>
+          <%end%>
+        <%end%>
+    </ul>
+  </div>
 </div>
 
 
