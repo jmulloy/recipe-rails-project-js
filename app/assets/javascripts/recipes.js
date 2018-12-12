@@ -1,16 +1,32 @@
 $( document ).ready(function(){
-	console.log("javascript is working");
-	listenForClickMyRecipes();
+	// console.log("javascript is working");
+	// listenForClickMyRecipes();
 	// listenForClickNewRecipe();
 	// listenForClickShowRecipe();
 	listenForClickAllRecipes();
 })
 
-function listenForClickMyRecipes() {
-	let asdf = document.getElementById('myrecipes')
+// function listenForClickMyRecipes() {
+// 	let asdf = document.getElementById('myrecipes')
+// 	asdf.addEventListener('click', function (e) {
+// 		e.preventDefault()
+// 		console.log("we clicked my recipes link");
+// 	})
+// }
+function listenForClickAllRecipes() {
+	let asdf = document.getElementById('allrecipes')
 	asdf.addEventListener('click', function (e) {
 		e.preventDefault()
-		console.log("we clicked my recipes link");
+		$.get("/recipes.json", function(data){
+            let recipes = data
+            // debugger
+            let name = recipes[0]["name"]
+            let description = recipes[0]["description"]
+            let somevariable = '<li>' + name + ' ' + description + '</li>'
+            // $("#allrecipes").html(somevariable)
+            $(".recipe").html(somevariable)
+    
+        })
 	})
 }
 
@@ -48,12 +64,12 @@ function listenForClickMyRecipes() {
 //         console.log("This has been clicked!!");
 //     })
 // }
-function listenForClickAllRecipes() {
-    let action = document.getElementById('allrecipes')
-    action.addEventListener('click', function(e){
-        e.preventDefault()
-        console.log("This has been clicked!!");
-    })
-}
+// function listenForClickAllRecipes() {
+//     let action = document.getElementById('allrecipes')
+//     action.addEventListener('click', function(e){
+//         e.preventDefault()
+//         console.log("This has been clicked!!");
+//     })
+// }
 
 
