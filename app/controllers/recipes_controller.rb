@@ -12,7 +12,8 @@ class RecipesController < ApplicationController
             @recipes = @user.recipes
         elsif params[:user_id]
             flash[:alert] = "You are not authorized to view this User's Recipes"
-            redirect_to recipes_path
+            format.html {render :index, layout: false}
+            format.json {render json: @recipes}
         else
             @recipes = Recipe.all
         end
