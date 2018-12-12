@@ -36,7 +36,7 @@ function listenForClickAllRecipes() {
 	})
 }
 
-function listenForClickRecipeName(clicked_id) {
+function listenForClickRecipeName() {
 	$(".recipename").click(function (e) {
         e.preventDefault()
         let url = this.attributes.href.textContent
@@ -58,6 +58,16 @@ Recipe.prototype.construct = function() {
     html += `</ul><p>${this.instructions}</p>`
     return html
 }
+
+function listenForClickMyRecipes() {
+    let asdf = document.getElementById('myrecipes')
+	asdf.addEventListener('click', function (e) {
+        e.preventDefault()       
+        console.log("this has been clicked!") 
+	
+}
+
+
 
     
     
