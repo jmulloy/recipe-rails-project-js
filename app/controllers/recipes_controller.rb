@@ -5,6 +5,10 @@ class RecipesController < ApplicationController
     def require_login
         redirect_to root_path unless session.include? :user_id
     end
+
+    def landing
+
+    end
     
     def index
         if params[:user_id] && current_user.id == params[:user_id].to_i

@@ -29,3 +29,11 @@ form_for [@user, @recipe] do |f|
     <%= form.submit %>
   </div>
 <% end %>
+
+ function listenForClickRecipeName() {
+//     let recipename = document.getElementsByClassName("recipe-name")
+//     recipename.addEventListener('click', function(e){
+//         e.preventDefault()
+//         console.log("This should work ")
+//     })
+// }
