@@ -1,6 +1,6 @@
 $( document ).ready(function(){
 	// console.log("javascript is working");
-	// listenForClickMyRecipes();
+	listenForClickMyRecipes();
 	// listenForClickNewRecipe();
 	listenForClickAllRecipes();
 })
@@ -60,60 +60,22 @@ Recipe.prototype.construct = function() {
 }
 
 function listenForClickMyRecipes() {
-    let asdf = document.getElementById('myrecipes')
+	let asdf = document.getElementById('myrecipes')
 	asdf.addEventListener('click', function (e) {
-        e.preventDefault()       
-        console.log("this has been clicked!") 
-	
+        e.preventDefault()
+        const url = this.attributes.href.textContent
+        $.get(url + ".json", function(data){
+            let recipes = data
+            let somevariable = ""
+            recipes.forEach((recipe, index) => {
+                somevariable += '<li ><a class="recipename" href="recipes/' + recipe["id"] + '">' + recipe["name"] + `</a>
+             <div id="${index}"` + recipe["description"] + '</div> </li>';
+            });
+
+               $("#ajax-content").html(somevariable)
+               listenForClickRecipeName()
+            //    this is where I code the event listener for the name of recipe 
+        })
+    //    console.log("this has been clicked!")
+    })
 }
-
-
-
-    
-    
-    
-    
-    
-    // let somevariable = ""
-
-
-    //          let linkIndex = document.getElementById('clicked_in')
-    //           somevariable = '<li>' + recipes[id]["instructions"] + ' - ' + recipes[id]["time"] + '</li>'
-    //             // $(`#${id}`).html(somevariable)
-//                 html += somevariable 
-//                 html += `</div>`
-// }           
-
-
-
-
-
-
-
-// $(function () {
-// 	console.log("javascript is working");
-// 	listenForClickMyRecipes();
-// 	// listenForClickNewRecipe();
-// 	// listenForClickShowRecipe();
-// 	listenForClickAllRecipes();
-// })
-
-
-
-
-// function listenForClickMyRecipes() {
-//     let action = document.getElementById('myrecipes')
-//     action.addEventListener('click', function(e){
-//         e.preventDefault()
-//         console.log("This has been clicked!!");
-//     })
-// }
-// function listenForClickAllRecipes() {
-//     let action = document.getElementById('allrecipes')
-//     action.addEventListener('click', function(e){
-//         e.preventDefault()
-//         console.log("This has been clicked!!");
-//     })
-// }
-
-
