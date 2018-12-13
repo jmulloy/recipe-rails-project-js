@@ -62,9 +62,12 @@ class RecipesController < ApplicationController
                     quantity = @recipe.quantities.build
                     quantity.build_ingredient       
             end
+            render :partial => 'recipes/form', :layout => false
+
         else
             flash[:alert] = "You are not authorized to create a recipe with your account!"
-            redirect_to recipes_path
+            render :partial => 'recipes/form', :layout => false
+
         end
             
     end
