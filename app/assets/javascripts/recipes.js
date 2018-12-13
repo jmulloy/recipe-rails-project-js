@@ -88,13 +88,35 @@ function listenForClickCreateRecipe() {
         const url = this.attributes.href.textContent;
         $.get(url).done(function(resp){
             $("#ajax-content").html(resp)
-            
+        //make a new function!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?
+            listenToForm()
         })
     })
 }
-
-
-
+function listenToForm() {
+    let form = document.getElementById("new_recipe")
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize()
+        let url = this.action;
+        addData()
+    })
+}
+function addData(url, data) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        success: function(resp) {
+            let userRecipe = new Recipe(resp);
+            document.getElementById("ajax-content").innerHTML = userRecipe.construct();
+        },
+        error: function(resp) {
+            
+            console.log("fail:" + resp)
+        }
+    })
+}
 
 
 

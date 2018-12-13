@@ -78,12 +78,15 @@ class RecipesController < ApplicationController
         @recipe = Recipe.new(recipe_params)
         if @recipe.save
             redirect_to user_recipe_path(current_user, @recipe)
+            render :partial => 'recipes/form', :layout => false
+
         else
             5.times do 
                 quantity = @recipe.quantities.build
                 quantity.build_ingredient
             end 
-        
+            render :partial => 'recipes/form', :layout => false
+
         end
     end
 

@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get '/logout', to: "sessions#destroy"
   get '/auth/github/callback' => 'sessions#create'
   get'/landing', to: "recipes#landing"
+  post '/landing', to: "recipes#landing"
 end
