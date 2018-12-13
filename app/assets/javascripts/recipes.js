@@ -84,6 +84,13 @@ function listenForClickCreateRecipe() {
     let asdf = document.getElementById('createrecipe')
     asdf.addEventListener('click', function(e) {
         e.preventDefault()
-        console.log("This has been clicked!")
+        const url = this.attributes.href.textContent;
+        getFormPartial(url);
+    })
+}
+
+function getFormPartial(url) {
+    $.get(url).done(function(resp) {
+        $("#ajax-content").html(resp)
     })
 }
