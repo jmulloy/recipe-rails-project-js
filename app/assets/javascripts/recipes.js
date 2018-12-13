@@ -1,7 +1,7 @@
 $( document ).ready(function(){
 	// console.log("javascript is working");
 	listenForClickMyRecipes();
-	// listenForClickNewRecipe();
+	listenForClickCreateRecipe();
 	listenForClickAllRecipes();
 })
 
@@ -71,6 +71,7 @@ function listenForClickMyRecipes() {
                 somevariable += '<li ><a class="recipename" href="recipes/' + recipe["id"] + '">' + recipe["name"] + `</a>
              <div id="${index}"` + recipe["description"] + '</div> </li>';
             });
+            
 
                $("#ajax-content").html(somevariable)
                listenForClickRecipeName()
@@ -85,12 +86,18 @@ function listenForClickCreateRecipe() {
     asdf.addEventListener('click', function(e) {
         e.preventDefault()
         const url = this.attributes.href.textContent;
-        getFormPartial(url);
+        $.get(url).done(function(resp){
+            $("ajax-content").html(resp)
+        })
     })
 }
 
-function getFormPartial(url) {
-    $.get(url).done(function(resp) {
-        $("#ajax-content").html(resp)
-    })
-}
+
+
+
+
+
+
+
+
+
