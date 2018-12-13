@@ -87,7 +87,8 @@ function listenForClickCreateRecipe() {
         e.preventDefault()
         const url = this.attributes.href.textContent;
         $.get(url).done(function(resp){
-            $("ajax-content").html(resp)
+            $("#ajax-content").html(resp)
+            
         })
     })
 }
