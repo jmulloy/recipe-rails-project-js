@@ -95,28 +95,33 @@ function listenForClickCreateRecipe() {
 }
 function listenToForm() {
     let form = document.getElementById("new_recipe")
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('commit', function(e) {
         e.preventDefault();
         let data = $(this).serialize()
         let url = this.action;
-        addData()
+        
+        addData(url, data)
     })
 }
-function addData(url, data) {
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: data,
-        success: function(resp) {
-            let userRecipe = new Recipe(resp);
-            document.getElementById("ajax-content").innerHTML = userRecipe.construct();
-        },
-        error: function(resp) {
+
+    function addData(url, data) {
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: data,
+          success: resp => {
+            const myRecipe = new Recipe(resp);
+            document.getElementById("ajax-content").innerHTML = myRecipe.construct();
             
-            console.log("fail:" + resp)
-        }
-    })
-}
+          },
+          error: resp => {
+            const customMessage = "<h4>Your recipe must have a name, time, ingredients, and instructions</h4>"
+            document.getElementById("ajax-content").innerHTML = customMessage;
+          }
+        })
+      }
+
+
 
 
 

@@ -76,16 +76,21 @@ class RecipesController < ApplicationController
     def create
         @user = User.find_by(id: params[:user_id])
         @recipe = Recipe.new(recipe_params)
+        
         if @recipe.save
-            redirect_to user_recipe_path(current_user, @recipe)
-            render :partial => 'recipes/form', :layout => false
+            respond_to do |f|
+                f.html {render :show}
+                f.json {render json: @recipe}            
+                # redirect_to user_recipe_path(current_user, @recipe)
+            # render :partial => 'recipes/form', :layout => false
+        end
 
         else
-            5.times do 
-                quantity = @recipe.quantities.build
-                quantity.build_ingredient
-            end 
-            render :partial => 'recipes/form', :layout => false
+            # 5.times do 
+            #     quantity = @recipe.quantities.build
+            #     quantity.build_ingredient
+            # end 
+            render json: @recipe, status: 406
 
         end
     end
