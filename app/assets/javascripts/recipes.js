@@ -95,7 +95,7 @@ function listenForClickCreateRecipe() {
 }
 function listenToForm() {
     let form = document.getElementById("new_recipe")
-    form.addEventListener('commit', function(e) {
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize()
         let url = this.action;
@@ -109,12 +109,12 @@ function listenToForm() {
           type: "POST",
           url: url,
           data: data,
-          success: resp => {
-            const myRecipe = new Recipe(resp);
+          success: response => {
+            const myRecipe = new Recipe(response);
             document.getElementById("ajax-content").innerHTML = myRecipe.construct();
             
           },
-          error: resp => {
+          error: response => {
             const customMessage = "<h4>Your recipe must have a name, time, ingredients, and instructions</h4>"
             document.getElementById("ajax-content").innerHTML = customMessage;
           }

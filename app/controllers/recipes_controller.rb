@@ -78,13 +78,7 @@ class RecipesController < ApplicationController
         @recipe = Recipe.new(recipe_params)
         
         if @recipe.save
-            respond_to do |f|
-                f.html {render :show}
-                f.json {render json: @recipe}            
-                # redirect_to user_recipe_path(current_user, @recipe)
-            # render :partial => 'recipes/form', :layout => false
-        end
-
+                render json: @recipe, status: 201
         else
             # 5.times do 
             #     quantity = @recipe.quantities.build
