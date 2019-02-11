@@ -1,5 +1,5 @@
 $( document ).ready(function(){
-	// console.log("javascript is working");
+	
 	listenForClickMyRecipes();
 	listenForClickCreateRecipe();
 	listenForClickAllRecipes();
@@ -104,9 +104,7 @@ function listenForClickMyRecipes() {
 
                $("#ajax-content").html(htmlresp)
                listenForClickRecipeName()
-            //    this is where I code the event listener for the name of recipe 
         })
-    //    console.log("this has been clicked!")
     })
 }
 
