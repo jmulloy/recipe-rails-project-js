@@ -23,18 +23,48 @@ function listenForClickAllRecipes() {
         e.preventDefault()        
 		$.get("/recipes.json", function(data){
             let recipes = data
-            let somevariable = ""
+            let htmlresp = "<p><button id='sortedrecipes'>Sorted Recipes</button></p>"
             recipes.forEach((recipe, index) => {
-                somevariable += '<li ><a class="recipename" href="recipes/' + recipe["id"] + '">' + recipe["name"] + `</a>
+                htmlresp += '<li ><a class="recipename" href="recipes/' + recipe["id"] + '">' + recipe["name"] + `</a>
              <div id="${index}"` + recipe["description"] + '</div> </li>';
             });
 
-               $("#ajax-content").html(somevariable)
+               $("#ajax-content").html(htmlresp)
                listenForClickRecipeName()
-            //    this is where I code the event listener for the name of recipe 
+               listenForButtonClick()
         })
 	})
 }
+
+function listenForButtonClick() {
+    let button = document.getElementById('sortedrecipes')
+    button.addEventListener('click', function(e){
+        $.get("/recipes.json", function(data){
+            let recipes = data
+            let newvariable = ""
+            recipes.sort(function(a,b){
+                const nameA = a.name.toUpperCase();
+                const nameB = b.name.toUpperCase();
+                if (nameA < nameB){
+                    return -1
+                }else if (nameA > nameB){
+                    return 1 
+                }else {
+                    return 0 
+                }
+            })
+            recipes.forEach((recipe, index) => {
+                newvariable += '<li ><a class="recipename" href="recipes/' + recipe["id"] + '">' + recipe["name"] + `</a>
+             <div id="${index}"` + recipe["description"] + '</div> </li>';
+            });
+
+               $("#ajax-content").html(newvariable)
+               listenForClickRecipeName()
+        })
+    })
+}
+
+
 
 function listenForClickRecipeName() {
 	$(".recipename").click(function (e) {
@@ -44,7 +74,6 @@ function listenForClickRecipeName() {
         $.get(url + ".json", function(data){
             let recipe = new Recipe(data)            
             $("#ajax-content").html(recipe.construct())
-                //<li><a class="recipename" href="recipes/1">Soup</a> - Nice meal for when feeling under the weather</li>
         })
     })
 }
@@ -66,14 +95,14 @@ function listenForClickMyRecipes() {
         const url = this.attributes.href.textContent
         $.get(url + ".json", function(data){
             let recipes = data
-            let somevariable = ""
+            let htmlresp = ""
             recipes.forEach((recipe, index) => {
-                somevariable += '<li ><a class="recipename" href="recipes/' + recipe["id"] + '">' + recipe["name"] + `</a>
+                htmlresp += '<li ><a class="recipename" href="recipes/' + recipe["id"] + '">' + recipe["name"] + `</a>
              <div id="${index}"` + recipe["description"] + '</div> </li>';
             });
             
 
-               $("#ajax-content").html(somevariable)
+               $("#ajax-content").html(htmlresp)
                listenForClickRecipeName()
             //    this is where I code the event listener for the name of recipe 
         })
@@ -88,7 +117,6 @@ function listenForClickCreateRecipe() {
         const url = this.attributes.href.textContent;
         $.get(url).done(function(resp){
             $("#ajax-content").html(resp)
-        //make a new function!?!?!?!?!?!?!?!?!?!?!?!?!?!?!?
             listenToForm()
         })
     })
@@ -97,6 +125,7 @@ function listenToForm() {
     let form = document.getElementById("new_recipe")
     form.addEventListener('submit', function(e) {
         e.preventDefault();
+        
         let data = $(this).serialize()
         let url = this.action;
         
@@ -120,6 +149,8 @@ function listenToForm() {
           }
         })
       }
+
+
 
 
 
