@@ -80,10 +80,7 @@ class RecipesController < ApplicationController
         if @recipe.save
                 render json: @recipe, status: 201
         else
-            # 5.times do 
-            #     quantity = @recipe.quantities.build
-            #     quantity.build_ingredient
-            # end 
+          
             render json: @recipe, status: 406
 
         end
