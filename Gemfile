@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.3'
+ruby '2.5.3'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -31,7 +31,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pry'
 gem 'bootstrap-sass', '~> 3.3.7'
-gem 'jquery-rails'
 gem 'loofah', '~> 2.2.3'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
