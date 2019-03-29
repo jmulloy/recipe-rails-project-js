@@ -30,6 +30,22 @@ class RecipesController < ApplicationController
         end
     end
 
+    def edit 
+        if params[:user_id] && current_user.id == params[:user_id].to_i
+            @user = current_user
+            @recipe = @user.recipes.find_by(id: params[:id])
+            if !@recipe
+                flash[:alert] = "This recipe doesnt exist in your collection!"
+                redirect_to user_recipe_path(@user)
+            else
+                render :edit
+            end
+        else
+            flash[:alert] = "You are not authorized to edit this recipe!"
+            redirect_to recipes_path
+        end
+    end
+
 
     def name
         @recipes = Recipe.ordered_by_name
